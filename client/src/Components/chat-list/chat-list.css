@@ -1,0 +1,24 @@
+.container{
+    width: 45vw;
+    height: 100vh;
+    border-right: 1px solid rgb(0,0,0,0.2);
+}
+
+.container-search{
+    border: 1px solid rgb(0,0,0, 0.2);
+    padding: 6px;
+    border-radius: 24px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+input{
+    border: none;
+}
+
+.chat-list {
+    overflow-y: scroll;
+    height: 100vh;
+    contain: size;
+    margin-left: 35px;
+}

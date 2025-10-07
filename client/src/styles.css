@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    font-family: Arial;
+}
+
+ul{
+    padding:0;
+    margin: 0;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-style-none {
+    list-style-type: none;
+}   
+
