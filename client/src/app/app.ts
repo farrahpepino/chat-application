@@ -4,10 +4,12 @@ import { Navbar } from '../Components/navbar/navbar';
 import { ChatRoom } from '../Components/chat-room/chat-room';
 import { ChatList } from '../Components/chat-list/chat-list';
 import { Profile } from '../Components/profile/profile';
+import { Login } from '../Components/Auth/login/login';
+import { Register } from '../Components/Auth/register/register';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, ChatList, ChatRoom, Profile],
+  imports: [RouterOutlet, Navbar, ChatList, ChatRoom, Profile, Login, Register],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
