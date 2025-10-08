@@ -1,0 +1,9 @@
+.container{
+    width: 47vw;
+    height: 100vh;
+    border-right: 1px solid #CCCCCC;
+    justify-content: center;
+    display: flex;
+    padding-top: 10rem;
+    text-align: center;
+}

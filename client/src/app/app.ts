@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from '../Components/navbar/navbar';
 import { ChatRoom } from '../Components/chat-room/chat-room';
 import { ChatList } from '../Components/chat-list/chat-list';
+import { Profile } from '../Components/profile/profile';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, ChatList, ChatRoom],
+  imports: [RouterOutlet, Navbar, ChatList, ChatRoom, Profile],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

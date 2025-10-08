@@ -8,7 +8,7 @@
     <div class="message-container flex-col">
         <div *ngFor="let message of messages" class="outer-message flex-col" [ngClass]="message.receipient != 'aisha'  ? 'align-items-left' : 'align-items-right' ">
             <strong class="margin-h-20">{{message.sender}}</strong>
-            <div class="inner-message flex-col" [ngClass]="message.receipient != 'aisha'  ? 'received-bg' : 'sent-bg' ">
+            <div class="inner-message flex-col" [ngClass]="message.sender == 'aisha'  ? 'bg-gray' : 'bg-red' ">
                 {{message.content}}
             </div>   
             <div class="subtext margin-h-20">{{message.createdAt}}</div>         

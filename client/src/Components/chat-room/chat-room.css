@@ -76,16 +76,6 @@
     justify-content: center;
 }
 
-
-.received-bg{
-    background-color: #CCCCCC;
-}
-
-.sent-bg{
-    background-color: #FF3131;
-    color: white;
-}
-
 .align-items-left{
     align-items: flex-start;
 }
