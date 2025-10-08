@@ -8,12 +8,20 @@
     align-items: center; 
 }
 
+img{
+    margin-top: -150px;
+}
+
 input{
     width: 400px;
     margin: 3px 10px;
     padding: 15px;
     border-radius: 24px;
     border: 1px solid #CCCCCC;
+}
+
+.logo{
+    width: 350px;
 }
 
 .red-btn{
@@ -24,11 +32,4 @@ input{
     color: white;
 }
 
-.logo{
-    width: 350px;
-}
-
-img{
-    margin-top: -150px;
-}
 

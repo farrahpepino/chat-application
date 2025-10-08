@@ -1,3 +1,10 @@
+.chat-list {
+    overflow-y: scroll;
+    height: 100vh;
+    contain: content;
+    margin-left: 35px;
+}
+
 .container{
     width: 47vw;
     height: 100vh;
@@ -14,11 +21,4 @@
 
 input{
     border: none;
-}
-
-.chat-list {
-    overflow-y: scroll;
-    height: 100vh;
-    contain: size;
-    margin-left: 35px;
 }

@@ -22,6 +22,16 @@
     border-radius: 24px;
 }
 
+.input{
+    width: 41vw;
+    outline: none;
+}
+
+.input[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #CCCCCC; 
+}
+
 .message-container{
     position: fixed;
     bottom: 65px;
@@ -35,32 +45,20 @@
     justify-content: flex-start;
 }
 
-
-.outer-content{
-    margin-left: 10px;
-    margin-top: 5px;
-}
-
 .message-input{
     width: 46vw;
-    display: flex;
-    justify-content: center;
     margin: 0px 10px;
     position: fixed;
     bottom: 10px;
     padding: 15px;
     border-radius: 24px;
     border: 1px solid #CCCCCC;
+    background-color: white;
 }
 
-.input{
-    width: 41vw;
-    outline: none;
-}
-
-.input[placeholder]:empty:before {
-    content: attr(placeholder);
-    color: #CCCCCC; 
+.outer-content{
+    margin-left: 10px;
+    margin-top: 5px;
 }
 
 .send-icon{
@@ -76,10 +74,3 @@
     justify-content: center;
 }
 
-.align-items-left{
-    align-items: flex-start;
-}
-
-.align-items-right{
-    align-items: flex-end;
-}
