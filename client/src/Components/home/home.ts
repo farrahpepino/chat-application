@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ChatList } from '../chat-list/chat-list';
 import { ChatRoom } from '../chat-room/chat-room';
 import { Profile } from '../profile/profile';
-import { Login } from '../Auth/login/login';
-import { Register } from '../Auth/register/register';
-
 
 @Component({
   selector: 'app-Home',
-  imports: [CommonModule, RouterOutlet, RouterLink, ChatList, ChatRoom, Profile, Login, Register],
+  imports: [CommonModule, RouterLink, ChatList, ChatRoom, Profile],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
