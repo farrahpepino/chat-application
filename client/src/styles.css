@@ -69,3 +69,12 @@ button{
     top: 15px;
 }
 
+.option-btn{
+    width: 100px;
+}
+
+.option{
+    gap: 20px;
+    margin-top: 10px;
+    justify-content: center;
+}
