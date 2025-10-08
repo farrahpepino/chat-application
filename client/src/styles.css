@@ -78,3 +78,18 @@ button{
     margin-top: 10px;
     justify-content: center;
 }
+
+.bt{
+    background-color: transparent;
+    padding: 0;
+}
+
+.bg{
+    backdrop-filter: blur(1px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.1);
+}

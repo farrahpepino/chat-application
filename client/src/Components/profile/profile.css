@@ -7,3 +7,19 @@
     padding-top: 10rem;
     text-align: center;
 }
+
+
+.confirm{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 300px;
+    height: 100px;
+    border: 1px solid #CCCCCC;
+    border-radius: 24px;
+    padding: 20px;
+    z-index: 10;
+}
+

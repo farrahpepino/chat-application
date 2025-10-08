@@ -4,8 +4,10 @@
         <input type="email" placeholder="Email">
         <input type="password" placeholder="Password">
         <br>
-        <button type="submit">Sign in</button>
+        <button type="submit" [routerLink]="['/']" class="red-btn">Sign in</button>
     </form>
     <br>
-    <div class="subtext">Don't have an account? <strong>Register.</strong></div>
+    <div class="subtext">Don't have an account? 
+        <button type="button" class="bt" [routerLink]="['/register']"><strong>Register.</strong></button>
+    </div>
 </div>

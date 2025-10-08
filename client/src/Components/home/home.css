@@ -1,3 +1,28 @@
+.container{
+    color: black;
+    width: 65px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    border-right: 1px solid #CCCCCC;
+}
+
+.logo{
+    width: 4rem;
+    height: auto;
+}
+
+ul{
+    margin-top: 20px ;
+}
+
+li{
+    padding: 15px 0rem;
+    text-align: center;
+}
+
 .chat-container{
     position: fixed;
     left: 65px;
@@ -11,19 +36,9 @@
     background-color: white;
     width: 70rem;
     height: 40rem;
-    border: 1px solid #333333;
+    border: 1px solid #CCCCCC;
     border-radius: 24px;
     padding: 20px;
-}
-
-.bg{
-    backdrop-filter: blur(1px);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .container-input{
@@ -50,24 +65,12 @@ input{
     border-radius: 24px;
     padding: 20px;
     contain: style;
+    outline: none;
 }
 
 .container-message[placeholder]:empty:before {
     content: attr(placeholder);
     color: rgb(0,0,0,0.5);
     font-size: 14px;
-}
-
-.confirm{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    width: 300px;
-    height: 100px;
-    border: 1px solid #CCCCCC;
-    border-radius: 24px;
-    padding: 20px;
 }
 

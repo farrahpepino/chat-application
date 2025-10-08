@@ -7,7 +7,16 @@
             <br>
         </div>
         
-        <button type="button" class="bg-red">Delete account</button>
+        <button type="button" class="bg-red" (click)="showConfirmAlert()">Delete account</button>
     </div>
 </div>
 
+
+<div class="bg" *ngIf="confirmAlertOpened"></div>
+<div class="confirm" *ngIf="confirmAlertOpened">
+    <div>Are you sure you want to delete your account?</div>
+    <div class="flex-row option">  
+        <button type="button" class="bg-red option-btn" (click)="hideConfirmAlert()">Yes</button>
+        <button type="button" class="option-btn" (click)="hideConfirmAlert()">Cancel</button>
+    </div>  
+</div>

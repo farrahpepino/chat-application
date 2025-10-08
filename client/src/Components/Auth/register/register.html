@@ -7,8 +7,12 @@
         <input type="password" placeholder="Password">
         <input type="password" placeholder="Confirm password">
         <br>
-        <button type="submit">Sign up</button>
+        <button type="submit" class="red-btn" [routerLink]="['/']">Sign up</button>
     </form>
     <br>
-    <div class="subtext">Already have an account? <strong>Log in.</strong></div>
+    <div class="subtext">Already have an account? 
+        <button type="button" class="bt" [routerLink]="['/login']">
+            <strong>Log in.</strong>
+        </button>
+    </div>
 </div>
