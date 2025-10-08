@@ -1,11 +1,11 @@
 .container{
-    width: 45vw;
+    width: 47vw;
     height: 100vh;
-    border-right: 1px solid rgb(0,0,0,0.2);
+    border-right: 1px solid #CCCCCC;
 }
 
 .container-search{
-    border: 1px solid rgb(0,0,0, 0.2);
+    border: 1px solid #CCCCCC;
     padding: 6px;
     border-radius: 24px;
     width: 90%;

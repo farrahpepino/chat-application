@@ -23,3 +23,24 @@ ul{
     list-style-type: none;
 }   
 
+input{
+    outline: none;
+    width: 40vw;
+}
+
+.subtext{
+    font-size: 14px;
+    opacity: 40%;
+}
+
+.margin-h-20{
+    margin: 5px 20px;
+}
+
+.bg-gray{
+    background-color:  #CCCCCC;
+}
+
+.bg-red{
+    background-color:  #FF3131;
+}
