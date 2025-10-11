@@ -54,6 +54,7 @@
     border: 1px solid #CCCCCC;
     border-radius: 24px;
     padding: 20px;
+    z-index: 10;
 }
 
 input{
