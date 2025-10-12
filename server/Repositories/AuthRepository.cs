@@ -13,7 +13,7 @@ namespace server.Repositories{
         }
         
         public async Task RegisterUser (User user){
-            _context.Add(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
 

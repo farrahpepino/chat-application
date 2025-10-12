@@ -27,9 +27,10 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 
 
-
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<IChatService, ChatService>();
 
 var app = builder.Build();
 
