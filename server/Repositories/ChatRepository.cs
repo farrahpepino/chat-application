@@ -8,7 +8,6 @@ namespace server.Repositories{
     public class ChatRepository: IChatRepository{
         private readonly AppDbContext _context;
         
-
         public ChatRepository(AppDbContext context){
             _context = context;
         }
@@ -33,7 +32,6 @@ namespace server.Repositories{
             return chatroom;
         }
 
-        
         public async Task<IEnumerable<ChatListDto>> GetChatList(string userId){
             var chats = await (from c in _context.ChatRooms
                        where c.Participants.Contains(userId)

@@ -29,7 +29,6 @@ namespace server.Repositories{
                 Console.WriteLine("Login successful!");
             }
 
-
         }
     }
 }
