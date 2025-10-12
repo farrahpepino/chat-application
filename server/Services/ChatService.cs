@@ -22,5 +22,13 @@ namespace server.Services {
         public async Task<string> GetChatRoomId(ChatRoomDto room){
             return await _repository.GetChatRoomId(room);
         }
+
+        public async Task<IEnumerable<ChatListDto>> GetChatList(string userId){
+            return await _repository.GetChatList(userId);
+        }
+
+        public async Task<IEnumerable<Message>> GetMessages(string chatRoomId){
+            return await _repository.GetMessages(chatRoomId);
+        }
     }
 }
