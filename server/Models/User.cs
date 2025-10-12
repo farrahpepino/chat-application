@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace server.Models
-{
+namespace server.Models{
+    
     public class User
     {
         [Required]
@@ -24,6 +24,7 @@ namespace server.Models
         [MaxLength(50)]
         public required string Password { get; set; }
 
+        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

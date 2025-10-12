@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace server.Repositories{
     public class AuthRepository: IAuthRepository{
-         private readonly AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public AuthRepository(AppDbContext context){
             _context = context;

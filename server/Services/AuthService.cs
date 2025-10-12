@@ -2,6 +2,7 @@ using server.Repositories;
 using server.Models;
 using server.Dtos;
 using System.Threading.Tasks;
+
 namespace server.Services {
     public class AuthService: IAuthService {
         private readonly IAuthRepository _repository;
