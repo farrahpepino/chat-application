@@ -22,7 +22,7 @@ namespace server.Models{
         public required string Email { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(1000)]
         public required string Password { get; set; }
 
         [Required]

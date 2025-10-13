@@ -2,6 +2,7 @@ using server.Repositories;
 using server.Models;
 using server.Dtos;
 using System.Threading.Tasks;
+using server.Helpers;
 
 namespace server.Services {
     public class AuthService: IAuthService {
@@ -15,6 +16,8 @@ namespace server.Services {
         }
         
         public async Task<AuthDto> RegisterUser (User user){
+
+            user.Password = PasswordManager.HashPassword(user.Password);
             var newUser = await _repository.RegisterUser(user);
             if (newUser==null){
                 return null;
@@ -31,11 +34,18 @@ namespace server.Services {
             };
         }
 
-        public async Task<AuthDto> LoginUser (LoginDto user){
+        public async Task<AuthDto> LoginUser (LoginDto user){        
             var existingUser = await _repository.LoginUser(user);
             if (existingUser==null){
                 return null;
             }
+            
+            var verified = PasswordManager.VerifyPassword(user.Password, existingUser.Password);
+
+            if (!verified){
+                return null;
+            }
+
             var token = _jwtService.GenerateToken(user.Email);
             return new AuthDto {
                 Token = token,

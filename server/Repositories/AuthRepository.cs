@@ -23,27 +23,22 @@ namespace server.Repositories{
             }
 
             _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-                return user;
+            await _context.SaveChangesAsync();
+            return user;
             
         }
 
-        public async Task<UserDto> LoginUser (LoginDto user){
+        public async Task<User> LoginUser (LoginDto user){
 
             var existingUser = await (from u in _context.Users
                             where u.Email == user.Email
                             select u).FirstOrDefaultAsync();
 
-            if (existingUser != null && existingUser.Password == user.Password){
-                return new UserDto{
-                                Id = existingUser.Id,
-                                Name = existingUser.Name,
-                                Username = existingUser.Username,
-                                Email = existingUser.Email,
-                                CreatedAt = existingUser.CreatedAt
-                            };
+            if (existingUser == null && existingUser.Password != user.Password){
+                return null;
             }
-            return null;
+
+            return existingUser;
         }
     }
 }

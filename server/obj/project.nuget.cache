@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6YpWYpuqPzw=",
+  "dgSpecHash": "hD2s592EK2w=",
   "success": true,
   "projectFilePath": "/Users/farrahpepino/Documents/GitHub/chat-application/server/server.csproj",
   "expectedPackageFiles": [
+    "/Users/farrahpepino/.nuget/packages/bcrypt.net-core/1.6.0/bcrypt.net-core.1.6.0.nupkg.sha512",
     "/Users/farrahpepino/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/farrahpepino/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.9/microsoft.aspnetcore.authentication.jwtbearer.9.0.9.nupkg.sha512",
     "/Users/farrahpepino/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
