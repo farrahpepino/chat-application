@@ -16,6 +16,7 @@ export class Home {
   componentSelected = "chats";
   createFormOpened = false;
   confirmAlertOpened = false;
+  emptyRecipient = true;
 
   switchView(component: string){
     if (component=="profile"){

@@ -20,7 +20,7 @@
     border-radius: 24px;
     width: 90%;
     margin: 0 auto;
-    position: fixed;
+    position: fixed; 
     left: 15px;
 }
 
@@ -70,6 +70,48 @@ li{
 .logo{
     width: 4rem;
     height: auto;
+}
+
+.parent{
+    position: absolute;
+    width: 100%;
+}
+
+.recipient{
+    font-size: 14;
+    border-radius: 24px;
+    background-color: #CCCCCC;
+    padding: 5px 10px;
+    margin: 0px 5px;
+}
+
+.search-result{
+    position: relative;
+    top: 40px;
+    background-color: #CCCCCC;
+    width: 86%;
+    max-height: 150px;
+    padding: 10px 25px;
+    z-index: 11;
+    border-radius: 10px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+
+}
+
+.send-btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #FF3131
 }
 
 ul{
