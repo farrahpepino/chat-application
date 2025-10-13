@@ -12,25 +12,20 @@ namespace server.Repositories{
             _context = context;
         }
         
-        public async Task<UserDto> RegisterUser (User user){
+        public async Task<User> RegisterUser (User user){
 
             var existingUser = await (from u in _context.Users
                             where u.Email == user.Email
                             select u).FirstOrDefaultAsync();
 
-            if (existingUser == null){
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-                return new UserDto {
-                    Id = existingUser.Id,
-                    Name = existingUser.Name,
-                    Username = existingUser.Username,
-                    Email = existingUser.Email,
-                    CreatedAt = existingUser.CreatedAt
-                };
+            if (existingUser != null){
+                return null;
             }
+
+            _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return user;
             
-            return null;
         }
 
         public async Task<UserDto> LoginUser (LoginDto user){

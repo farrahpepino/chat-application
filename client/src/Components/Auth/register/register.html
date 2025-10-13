@@ -1,17 +1,17 @@
 <div class="container">
     <img src="ct.png" alt="logo" class="logo">
-    <form action="" class="flex-col form">
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Username">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm password">
+    <form [formGroup]="registerForm" class="flex-col form" (ngSubmit)="submitForm()" >
+        <input required type="text" placeholder="Name" formControlName="name">
+        <input required type="text" placeholder="Username" formControlName="username">
+        <input required type="email" placeholder="Email" formControlName="email">
+        <input required type="password" placeholder="Password" formControlName="password">
+        <input required type="password" placeholder="Confirm password" formControlName="confirmPassword">
         <br>
-        <button type="submit" class="red-btn" [routerLink]="['/']">Sign up</button>
+        <button type="submit" class="red-btn" [disabled]="!registerForm.valid">Sign up</button>
     </form>
     <br>
     <div class="subtext">Already have an account? 
-        <button type="button" class="bt" [routerLink]="['/login']">
+        <button type="button" class="bt" [routerLink]="['/']">
             <strong>Log in.</strong>
         </button>
     </div>

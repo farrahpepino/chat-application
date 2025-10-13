@@ -68,6 +68,7 @@ var app = builder.Build();
 app.UseMiddleware<GlobalExceptionHandler>();
 // app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev"); 
+app.MapControllers();
 
 app.Run();
 

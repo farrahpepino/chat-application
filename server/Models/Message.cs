@@ -5,6 +5,7 @@ namespace server.Models{
 
     public class Message{
         [Required]
+        [Key]
         [Column(TypeName = "varchar(36)")]
         public string Id {get; set;} = Guid.NewGuid().ToString();
 

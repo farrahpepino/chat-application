@@ -7,11 +7,11 @@ import { ChatList } from '../Components/chat-list/chat-list';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         component: Home
     },
     {
-        path: 'login',
+        path: '',
         component: Login
     },
     {

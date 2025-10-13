@@ -12,7 +12,7 @@ namespace server.Controllers{
             _service = service;
         }
     
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginDto user){
             var existingUser = await _service.LoginUser(user);
             if (existingUser==null){
@@ -21,7 +21,7 @@ namespace server.Controllers{
             return Ok(existingUser);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User user){
             var newUser = await _service.RegisterUser(user);
             if (newUser==null){

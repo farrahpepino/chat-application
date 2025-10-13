@@ -13,7 +13,7 @@ namespace server.Repositories{
         }
 
         public async Task CreateChatRoom (ChatRoom room){
-            _context.ChatRooms.Add(room);
+            _context.Chatrooms.Add(room);
             await _context.SaveChangesAsync();
         }
 
@@ -23,7 +23,7 @@ namespace server.Repositories{
         }
 
         public async Task<string> GetChatRoomId(ChatRoomDto room){
-            var chatroom = await (from c in _context.ChatRooms
+            var chatroom = await (from c in _context.Chatrooms
                             where c.Participants.Contains(room.ParticipantId1) && 
                             c.Participants.Contains(room.ParticipantId2)
                             select c.Id)
@@ -33,7 +33,7 @@ namespace server.Repositories{
         }
 
         public async Task<IEnumerable<ChatListDto>> GetChatList(string userId){
-            var chats = await (from c in _context.ChatRooms
+            var chats = await (from c in _context.Chatrooms
                        where c.Participants.Contains(userId)
                        let participantId2 = c.Participants
                                               .Where(p => p != userId)
