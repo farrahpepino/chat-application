@@ -40,3 +40,11 @@
 /Users/farrahpepino/Documents/GitHub/chat-application/server/obj/Debug/net9.0/server.pdb
 /Users/farrahpepino/Documents/GitHub/chat-application/server/obj/Debug/net9.0/server.genruntimeconfig.cache
 /Users/farrahpepino/Documents/GitHub/chat-application/server/obj/Debug/net9.0/ref/server.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/farrahpepino/Documents/GitHub/chat-application/server/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

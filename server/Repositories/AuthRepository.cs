@@ -12,23 +12,43 @@ namespace server.Repositories{
             _context = context;
         }
         
-        public async Task RegisterUser (User user){
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+        public async Task<UserDto> RegisterUser (User user){
+
+            var existingUser = await (from u in _context.Users
+                            where u.Email == user.Email
+                            select u).FirstOrDefaultAsync();
+
+            if (existingUser == null){
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return new UserDto {
+                    Id = existingUser.Id,
+                    Name = existingUser.Name,
+                    Username = existingUser.Username,
+                    Email = existingUser.Email,
+                    CreatedAt = existingUser.CreatedAt
+                };
+            }
+            
+            return null;
         }
 
-        public async Task LoginUser (LoginDto user){
+        public async Task<UserDto> LoginUser (LoginDto user){
 
-            var query = from u in _context.Users
+            var existingUser = await (from u in _context.Users
                             where u.Email == user.Email
-                            select u;
-
-            var existingUser = await query.FirstOrDefaultAsync();
+                            select u).FirstOrDefaultAsync();
 
             if (existingUser != null && existingUser.Password == user.Password){
-                Console.WriteLine("Login successful!");
+                return new UserDto{
+                                Id = existingUser.Id,
+                                Name = existingUser.Name,
+                                Username = existingUser.Username,
+                                Email = existingUser.Email,
+                                CreatedAt = existingUser.CreatedAt
+                            };
             }
-
+            return null;
         }
     }
 }

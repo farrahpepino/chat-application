@@ -3,7 +3,7 @@ using server.Dtos;
 
 namespace server.Services {
     public interface IAuthService {
-        Task RegisterUser (User user);
-        Task LoginUser (LoginDto user);
+        Task<AuthDto> RegisterUser (User user);
+        Task<AuthDto> LoginUser (LoginDto user);
     }
 }
