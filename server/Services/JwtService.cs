@@ -14,8 +14,7 @@ namespace server.Services{
             _secret = configuration["Jwt:Secret"] ?? throw new ArgumentNullException("Jwt:Secret is missing from configuration.");
         }
 
-        public string GenerateToken(string email)
-        {
+        public string GenerateToken(string email){
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Email, email), 

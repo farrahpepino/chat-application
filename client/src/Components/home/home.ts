@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ChatList } from '../chat-list/chat-list';
 import { ChatRoom } from '../chat-room/chat-room';
 import { Profile } from '../profile/profile';
@@ -12,6 +12,7 @@ import { Profile } from '../profile/profile';
   styleUrl: './home.css'
 })
 export class Home {
+  constructor(private router: Router){}
   componentSelected = "chats";
   createFormOpened = false;
   confirmAlertOpened = false;
@@ -30,6 +31,11 @@ export class Home {
   }
   hideCreateForm(){
     this.createFormOpened=false;
+  }
+
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
 
 }

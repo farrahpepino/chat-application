@@ -5,6 +5,7 @@ namespace server.Middlewares{
     public class GlobalExceptionHandler{
         private readonly RequestDelegate _next;
         private readonly ILogger<GlobalExceptionHandler> _logger;
+        
         public GlobalExceptionHandler (RequestDelegate next, ILogger<GlobalExceptionHandler> logger){
             _next = next;
             _logger = logger;
