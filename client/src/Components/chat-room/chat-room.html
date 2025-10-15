@@ -1,19 +1,19 @@
 <div>
     <div class="header flex-col">
-        <strong>aisha</strong>
-        <div class="subtext">@aishapepino</div>
-        <div  class="subtext">Online</div>
+        <strong>{{recipient!.name}}</strong>
+        <div class="subtext">@{{recipient!.username}}</div>
     </div>
 
-    <div class="message-container flex-col">
+    <div class="message-container flex-col" *ngIf="messages!.length > 0">
         <div *ngFor="let message of messages" class="outer-message flex-col" [ngClass]="message.receipient != 'aisha'  ? 'align-items-left' : 'align-items-right' ">
             <strong class="margin-h-20">{{message.sender}}</strong>
             <div class="inner-message flex-col" [ngClass]="message.sender == 'aisha'  ? 'bg-gray' : 'bg-red' ">
                 {{message.content}}
-            </div>   
+            </div>      
             <div class="subtext margin-h-20">{{message.createdAt}}</div>         
         </div>  
     </div>
+    <div *ngIf="messages!.length==0" class="subtext v-h-center">No messages yet — start the conversation!</div>
 
         <div class="message-input" >
             <div contenteditable="true" placeholder="Type a message..." class="input"></div>
@@ -23,3 +23,4 @@
         </div>
         
 </div>
+

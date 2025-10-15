@@ -20,5 +20,15 @@ namespace server.Controllers {
             }
             return Ok(user);
         }
+
+        [HttpGet("search/{query}")]
+        public async Task<IActionResult> SearchUser(string query){
+
+            var user = await _service.SearchUser(query);
+            if(user==null){
+                return NotFound();
+            }
+            return Ok(user);
+        }
     }
 }

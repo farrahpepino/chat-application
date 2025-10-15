@@ -13,5 +13,9 @@ namespace server.Services {
         public async Task<UserDto> GetUser (string userId){
             return await _repository.GetUser(userId);
         }
+
+        public async Task<IEnumerable<UserDto>> SearchUser (string query){
+            return await _repository.SearchUser(query);
+        }
     }
 }

@@ -25,5 +25,19 @@ namespace server.Repositories{
             return user;
         }
 
+        public async Task<IEnumerable<UserDto>> SearchUser(string query){
+            var user = await(from u in _context.Users
+                            where u.Name.Contains(query)
+                            select new UserDto{
+                            Id = u.Id,
+                            Name = u.Name,
+                            Username = u.Username,
+                            Email =  u.Email,
+                            CreatedAt = u.CreatedAt
+                            }).ToListAsync(); 
+
+            return user;
+        }
+
     }
 }

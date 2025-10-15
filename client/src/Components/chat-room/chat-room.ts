@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { UserDto } from '../../DTOs/UserDto';
 interface Message{
   sender: string;
   receipient: string;
@@ -14,116 +15,13 @@ interface Message{
   styleUrl: './chat-room.css'
 })
 export class ChatRoom {
-
-  messages: Message[] =[
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "fine",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "fine",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "fine",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "fine",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "fine",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "can you please buy me iced chocolate?",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "aisha",
-      receipient: "farrah",
-      content: "okay, but cook meatballs",
-      createdAt: "October 7, 2025"
-    },
-    {
-      sender: "farrah",
-      receipient: "aisha",
-      content: "okieee",
-      createdAt: "October 7, 2025"
+  recipient: UserDto | null = null;
+  constructor(){
+    const displayedUser = localStorage.getItem("displayedUser")
+    if (displayedUser){
+      this.recipient = JSON.parse(displayedUser);
     }
+  }
 
-  ]
+  messages: Message[] | null = [];
 }
