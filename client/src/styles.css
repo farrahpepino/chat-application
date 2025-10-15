@@ -23,7 +23,7 @@ body{
 }
 
 .bg-gray{
-    background-color:  #CCCCCC;
+    background-color:  #F7F7F7;
 }
 
 .bg-red{
@@ -91,7 +91,7 @@ input{
 }
 
 .subtext{
-    font-size: 14px;
+    font-size: 12px;
     opacity: 40%;
 }
 

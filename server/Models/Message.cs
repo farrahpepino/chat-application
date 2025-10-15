@@ -18,6 +18,10 @@ namespace server.Models{
         public string SenderId {get; set;}
 
         [Required]
+        [Column(TypeName = "varchar(36)")]
+        public string RecipientId {get; set;}
+
+        [Required]
         public string Content {get; set;}
 
         [Required]

@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './chat-list.css'
 })
 export class ChatList {
-
+  isActive=true;
 }

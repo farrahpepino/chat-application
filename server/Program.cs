@@ -1,6 +1,7 @@
 using server.Repositories;
 using server.Services;
 using server.Data;
+using server.Hubs;
 using server.Models;
 using server.Middlewares;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,8 @@ builder.Services.AddScoped<IChatService, ChatService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
+
 
 
 // configure jwt authentication
@@ -69,6 +72,8 @@ app.UseMiddleware<GlobalExceptionHandler>();
 // app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev"); 
 app.MapControllers();
+app.MapHub<ChatHub>("/hubs/chat");
+
 
 app.Run();
 

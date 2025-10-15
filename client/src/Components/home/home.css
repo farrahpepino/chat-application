@@ -51,7 +51,7 @@
     background-color: white;
     width: 70rem;
     height: 40rem;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #F7F7F7;
     border-radius: 24px;
     padding: 20px;
     z-index: 10;
@@ -88,7 +88,7 @@ li{
 .search-result{
     position: relative;
     top: 40px;
-    background-color: #CCCCCC;
+    background-color: #F7F7F7;
     width: 86%;
     max-height: 150px;
     padding: 10px 25px;
