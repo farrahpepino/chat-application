@@ -22,10 +22,10 @@ namespace server.Repositories{
             await _context.SaveChangesAsync();
         }
 
-        public async Task<string> GetChatRoomId(ChatRoomDto room){
+        public async Task<string> GetChatRoomId(string participantId1, string participantId2){
             var chatroom = await (from c in _context.Chatrooms
-                            where c.Participants.Contains(room.ParticipantId1) && 
-                            c.Participants.Contains(room.ParticipantId2)
+                            where c.Participants.Contains(participantId1) && 
+                            c.Participants.Contains(participantId2)
                             select c.Id)
                             .FirstOrDefaultAsync();
 

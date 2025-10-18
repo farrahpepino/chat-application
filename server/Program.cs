@@ -1,9 +1,9 @@
 using server.Repositories;
 using server.Services;
 using server.Data;
-using server.Hubs;
 using server.Models;
 using server.Middlewares;
+using server.WebSockets;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql; 
 using System.Text;
@@ -44,7 +44,6 @@ builder.Services.AddScoped<IChatService, ChatService>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddControllers();
-builder.Services.AddSignalR();
 
 
 
@@ -71,8 +70,9 @@ var app = builder.Build();
 app.UseMiddleware<GlobalExceptionHandler>();
 // app.UseHttpsRedirection();
 app.UseCors("AllowAngularDev"); 
+app.UseWebSockets(); 
 app.MapControllers();
-app.MapHub<ChatHub>("/hubs/chat");
+app.Map("/ws/chat", ChatWebSocketHandler.HandleAsync);
 
 
 app.Run();

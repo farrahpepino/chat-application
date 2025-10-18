@@ -1,10 +1,10 @@
 export interface MessageModel{
-    id: string;
+    id?: string;
     chatRoomId: string;
     senderId: string;
-    receipientId: string;
+    recipientId: string;
     content: string;
-    createdAt: Date;
+    createdAt?: Date;
 }
 
 

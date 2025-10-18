@@ -8,7 +8,7 @@ import { UserModel } from '../../Models/UserModel';
 })
 export class User {
   constructor(private http: HttpClient){}
-  apiUrl = "http://localhost:5007/user";
+  baseUrl = "http://localhost:5007/user";
 
   getCurrentLoggedIn(): UserDto | null{
     const data = sessionStorage.getItem("currentLoggedIn");
@@ -29,7 +29,7 @@ export class User {
     }
   
     const encodedQuery = encodeURIComponent(query.trim());
-    return this.http.get<UserModel[]>(`${this.apiUrl}/search/${encodedQuery}`);
+    return this.http.get<UserModel[]>(`${this.baseUrl}/search/${encodedQuery}`);
   }
   
   

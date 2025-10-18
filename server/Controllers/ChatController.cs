@@ -1,6 +1,8 @@
 using server.Services;
 using server.Models;
 using server.Dtos;
+using server.WebSockets;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 
 namespace server.Controllers {
@@ -12,24 +14,25 @@ namespace server.Controllers {
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("rooms")]
         public async Task<IActionResult> CreateChatRoom ([FromBody] ChatRoom room){
             await _service.CreateChatRoom(room);
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("messages")]
         public async Task<IActionResult> SendMessage ([FromBody] Message message){
             await _service.SendMessage(message);
+            await ChatWebSocketHandler.SendMessageToUserAsync(
+                message.RecipientId, 
+                System.Text.Json.JsonSerializer.Serialize(message)
+            );
             return Ok();
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetChatRoomId ([FromBody] ChatRoomDto room){
-            var roomId = await _service.GetChatRoomId(room);
-            if(roomId==null){
-                return NotFound();
-            }
+        public async Task<IActionResult> GetChatRoomId([FromQuery] string participantId1, [FromQuery] string participantId2){
+            var roomId = await _service.GetChatRoomId(participantId1, participantId2);
             return Ok(roomId);
         }
 

@@ -9,13 +9,13 @@ import { LoginDto } from '../../DTOs/LoginDto';
 })
 export class Auth {
   constructor (private http: HttpClient){}
-  apiUrl = "http://localhost:5007/auth";
+  baseUrl = "http://localhost:5007/auth";
 
   registerUser(user: UserModel): Observable<UserDto>{
-    return this.http.post<UserDto>(`${this.apiUrl}/register`, user);
+    return this.http.post<UserDto>(`${this.baseUrl}/register`, user);
   }
 
   loginUser(user: LoginDto): Observable<UserDto>{
-    return this.http.post<UserDto>(`${this.apiUrl}/login`, user);
+    return this.http.post<UserDto>(`${this.baseUrl}/login`, user);
   }
 }
