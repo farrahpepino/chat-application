@@ -4,6 +4,9 @@ using server.Dtos;
 using server.WebSockets;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text;
+
 
 namespace server.Controllers {
     [ApiController]
@@ -23,17 +26,17 @@ namespace server.Controllers {
         [HttpPost("messages")]
         public async Task<IActionResult> SendMessage ([FromBody] Message message){
             await _service.SendMessage(message);
-            await ChatWebSocketHandler.SendMessageToUserAsync(
-                message.RecipientId, 
-                System.Text.Json.JsonSerializer.Serialize(message)
-            );
+            var messageJson = JsonSerializer.Serialize(message);
+            await ChatWebSocketHandler.SendMessageToUserAsync(message.RecipientId, messageJson);
+            await ChatWebSocketHandler.SendMessageToUserAsync(message.SenderId, messageJson);
+
             return Ok();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetChatRoomId([FromQuery] string participantId1, [FromQuery] string participantId2){
             var roomId = await _service.GetChatRoomId(participantId1, participantId2);
-            return Ok(roomId);
+            return Ok(new { roomId });
         }
 
         [HttpGet("{userId}/chats")]
@@ -50,6 +53,10 @@ namespace server.Controllers {
             var messages = await _service.GetMessages(chatRoomId);
             if(messages==null){
                 return NotFound();
+            }
+            var messagesJson = JsonSerializer.Serialize(messages);
+            foreach (var connection in ChatWebSocketHandler.GetConnections()) {
+                await ChatWebSocketHandler.SendMessageToUserAsync(connection.Key, messagesJson);
             }
             return Ok(messages);
         }

@@ -15,7 +15,14 @@ namespace server.Data
         {
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<ChatRoom>().ToTable("chatrooms");
+            modelBuilder.Entity<ChatRoom>()
+            .Property(c => c.Participants)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+            );
             modelBuilder.Entity<Message>().ToTable("messages");
+
         }
     }
 }

@@ -10,19 +10,13 @@ namespace server.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Participants",
-                table: "chatrooms",
-                newName: "ParticipantsJson");
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ParticipantsJson",
-                table: "chatrooms",
-                newName: "Participants");
+
         }
     }
 }

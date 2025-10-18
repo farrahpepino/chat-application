@@ -5,21 +5,32 @@
     </div>
 
     <div class="message-container flex-col" *ngIf="messages!.length > 0">
-        <div *ngFor="let message of messages" class="outer-message flex-col" [ngClass]="message.receipient != 'aisha'  ? 'align-items-left' : 'align-items-right' ">
-            <strong class="margin-h-20">{{message.sender}}</strong>
-            <div class="inner-message flex-col" [ngClass]="message.sender == 'aisha'  ? 'bg-gray' : 'bg-red' ">
+        <div *ngFor="let message of messages" class="outer-message flex-col" [ngClass]="{
+            'align-items-left': message.senderId !== currentLoggedIn?.id,
+            'align-items-right': message.senderId === currentLoggedIn?.id
+          }">
+            <strong class="margin-h-20">Farrah Pepino</strong>
+            <div class="inner-message flex-col"
+            [ngClass]="{
+                'bg-gray': message.senderId !== currentLoggedIn?.id,
+                'bg-red': message.senderId === currentLoggedIn?.id
+              }"
+            >
                 {{message.content}}
             </div>      
             <div class="subtext margin-h-20">{{message.createdAt}}</div>         
         </div>  
     </div>
-    <div *ngIf="messages!.length==0" class="subtext v-h-center">No messages yet — start the conversation!</div>
+    <div *ngIf="messages!.length===0" class="subtext v-h-center">No messages yet — start the conversation!</div>
 
         <div class="message-input" >
-            <div contenteditable="true" placeholder="Type a message..." class="input"></div>
-            <div class="send-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" /></svg>            
-            </div>
+            <form [formGroup]="messageForm" (ngSubmit)="sendMessage(recipient!.id)" >
+                <input type="text" placeholder="Type a message..." class="input" formControlName="content">
+                <button class="send-icon bt" title="send-button" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" /></svg>            
+                </button>
+            </form>
+           
         </div>
         
 </div>

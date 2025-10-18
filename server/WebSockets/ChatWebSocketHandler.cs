@@ -48,13 +48,52 @@ namespace server.WebSockets
             }
         }
 
-        public static async Task SendMessageToUserAsync(string userId, string message)
+        public static async Task<bool> SendMessageToUserAsync(string userId, string message)
         {
-            if (_connections.TryGetValue(userId, out var socket) && socket.State == WebSocketState.Open)
+            try
             {
-                var bytes = Encoding.UTF8.GetBytes(message);
-                await socket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
-            }
+        if (string.IsNullOrEmpty(userId))
+        {
+            Console.WriteLine("SendMessageToUserAsync: userId is null/empty");
+            return false;
+        }
+
+        if (!_connections.TryGetValue(userId, out var socket))
+        {
+            Console.WriteLine($"SendMessageToUserAsync: no connection for userId={userId}");
+            return false;
+        }
+
+        if (socket == null)
+        {
+            Console.WriteLine($"SendMessageToUserAsync: socket was null for userId={userId}");
+            return false;
+        }
+
+        if (socket.State != WebSocketState.Open)
+        {
+            Console.WriteLine($"SendMessageToUserAsync: socket not open for userId={userId}. State={socket.State}");
+            _connections.TryRemove(userId, out _);
+            return false;
+        }
+
+        var bytes = Encoding.UTF8.GetBytes(message);
+        await socket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
+        Console.WriteLine($"SendMessageToUserAsync: sent to {userId}");
+        return true;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"SendMessageToUserAsync ERROR sending to {userId}: {ex}");
+        _connections.TryRemove(userId, out _);
+        return false;
+    }
+}
+
+
+        public static IReadOnlyDictionary<string, WebSocket> GetConnections()
+        {
+            return _connections;
         }
     }
 }

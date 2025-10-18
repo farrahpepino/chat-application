@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Chat {
-  private baseUrl = 'https://localhost:5007/chat'; 
+  private baseUrl = '/chat'; 
   constructor(private http: HttpClient) {}
 
   getChatRoomId(participantId1: string, participantId2: string): Observable<string>{
@@ -15,7 +15,7 @@ export class Chat {
       params: {
         participantId1: participantId1,
         participantId2: participantId2
-      }
+      },
     });
     return roomId;
   }
@@ -27,11 +27,18 @@ export class Chat {
     });
   }
 
-  sendMessage(message: MessageModel) {
-    return this.http.post(`${this.baseUrl}/messages`, message);
+  sendMessage(message: MessageModel) {  
+    return this.http.post(`${this.baseUrl}/messages`, 
+      {
+        chatRoomId:  message.chatRoomId!,
+        senderId: message.senderId,
+        recipientId: message.recipientId,
+        content: message.content
+     
+    });
   }
 
-  getMessages(){
-    
-  }
+  getMessages(roomId: string): Observable<MessageModel[]>{
+      return this.http.get<MessageModel[]>(`${this.baseUrl}/${roomId}/messages`)
+    }
 }

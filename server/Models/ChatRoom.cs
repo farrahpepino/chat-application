@@ -8,16 +8,8 @@ namespace server.Models{
         [Key]
         [Column(TypeName = "varchar(36)")]
         public string Id {get; set;}
-
-        [NotMapped]
-        public List<string> Participants { get; set; } = new List<string>();
-
-        public string ParticipantsJson
-        {
-            get => JsonSerializer.Serialize(Participants);
-            set => Participants = string.IsNullOrEmpty(value)
-                ? new List<string>()
-                : JsonSerializer.Deserialize<List<string>>(value) ?? new List<string>();
-        }
+        
+        [Required]
+        public List<string> Participants { get; set; } = new();   
     }
 }

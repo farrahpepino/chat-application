@@ -27,7 +27,7 @@ namespace server.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("ParticipantsJson")
+                    b.Property<string>("Participants")
                         .IsRequired()
                         .HasColumnType("longtext");
 

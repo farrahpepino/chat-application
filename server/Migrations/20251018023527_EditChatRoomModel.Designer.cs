@@ -12,7 +12,7 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251018015141_EditChatRoomModel")]
+    [Migration("20251018023527_EditChatRoomModel")]
     partial class EditChatRoomModel
     {
         /// <inheritdoc />
@@ -30,7 +30,7 @@ namespace server.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("ParticipantsJson")
+                    b.Property<string>("Participants")
                         .IsRequired()
                         .HasColumnType("longtext");
 

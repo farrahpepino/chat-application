@@ -17,6 +17,10 @@
     border-radius: 24px;
 }
 
+input{
+    border: none;
+}
+
 .input{
     outline: none;
 }
@@ -71,4 +75,3 @@
 .v-h-center{
     width: 50vw;
 }
-
