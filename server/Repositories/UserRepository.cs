@@ -39,5 +39,14 @@ namespace server.Repositories{
             return user;
         }
 
+        public async Task DeleteUser(string userId){
+            var user = await (from u in _context.Users
+                            where u.Id == userId
+                            select u).FirstOrDefaultAsync();
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

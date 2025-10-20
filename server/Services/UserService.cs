@@ -17,5 +17,9 @@ namespace server.Services {
         public async Task<IEnumerable<UserDto>> SearchUser (string query){
             return await _repository.SearchUser(query);
         }
+
+        public async Task DeleteUser(string userId){
+            return await _repository.DeleteUser(userId);
+        }
     }
 }

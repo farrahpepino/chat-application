@@ -14,7 +14,7 @@
 <div class="confirm" *ngIf="confirmAlertOpened">
     <div>Are you sure you want to delete your account?</div>
     <div class="flex-row option">  
-        <button type="button" class="bg-red option-btn" (click)="hideConfirmAlert()">Yes</button>
+        <button type="button" class="bg-red option-btn" (click)="deleteUser(currentLoggedIn!.id)">Yes</button>
         <button type="button" class="option-btn" (click)="hideConfirmAlert()">Cancel</button>
     </div>  
 </div>

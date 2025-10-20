@@ -38,7 +38,6 @@ export class Websocket {
   }
 
   getMessages(): Observable<any> {
-    
     return this.messageSubject.asObservable();
   }
   

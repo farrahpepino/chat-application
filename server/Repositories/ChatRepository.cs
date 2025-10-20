@@ -33,30 +33,47 @@ namespace server.Repositories{
         }
 
         public async Task<IEnumerable<ChatListDto>> GetChatList(string userId){
-            var chats = await (from c in _context.Chatrooms
-                       where c.Participants.Contains(userId)
-                       let participantId2 = c.Participants
-                                              .Where(p => p != userId)
-                                              .FirstOrDefault()
-                       join u in _context.Users on participantId2 equals u.Id into userGroup
-                       let participant2 = userGroup.FirstOrDefault()
+            var chatrooms = await _context.Chatrooms
+                .AsNoTracking()
+                .ToListAsync();
 
-                       join m in _context.Messages on c.Id equals m.ChatRoomId into msgs
-                       let latestMessage = msgs.OrderByDescending(m => m.CreatedAt).FirstOrDefault()
-                        
-                       select new ChatListDto
-                       {
-                           ChatRoomId = c.Id,
-                           ParticipantId2 = participantId2,
-                           ParticipantName2 = participant2.Name, 
-                           LatestMessage = latestMessage.Content,
-                           LatestMessageTimestamp = latestMessage.CreatedAt
-                       })
-                        .OrderByDescending(c => c.LatestMessageTimestamp) 
-                        .ToListAsync(); 
+            var userChatrooms = chatrooms
+                .Where(c => c.Participants.Contains(userId))
+                .ToList();
 
-            return chats;
+            var result = new List<ChatListDto>();
+
+            foreach (var c in userChatrooms)
+            {
+                var recipientId = c.Participants.FirstOrDefault(p => p != userId);
+                if (recipientId == null) continue;
+
+                var recipient = await _context.Users
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(u => u.Id == recipientId);
+
+                var latestMessage = await _context.Messages
+                    .AsNoTracking()
+                    .Where(m => m.ChatRoomId == c.Id)
+                    .OrderByDescending(m => m.CreatedAt)
+                    .FirstOrDefaultAsync();
+
+                result.Add(new ChatListDto
+                {
+                    ChatRoomId = c.Id,
+                    RecipientId = recipient?.Id ?? "(Unknown)",
+                    RecipientName = recipient?.Name ?? "(Unknown)",
+                    RecipientUsername = recipient?.Username ?? "(Unknown)",
+                    LatestMessage = latestMessage?.Content ?? "",
+                    LatestMessageTimestamp = latestMessage?.CreatedAt
+                });
+            }
+
+            return result
+                .OrderByDescending(c => c.LatestMessageTimestamp)
+                .ToList();
         }
+
 
         public async Task<IEnumerable<Message>> GetMessages(string chatRoomId){
             var messages = await (from m in _context.Messages 

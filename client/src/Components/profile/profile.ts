@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../Services/user/user';
 import { UserDto } from '../../DTOs/UserDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ import { UserDto } from '../../DTOs/UserDto';
   styleUrl: './profile.css'
 })
 export class Profile implements OnInit {
-  constructor(private userService: User){}
+  constructor(private userService: User, private router: Router){}
   currentLoggedIn: UserDto | null = null; 
   ngOnInit(): void {
     this.currentLoggedIn = this.userService.getCurrentLoggedIn();
@@ -23,5 +24,11 @@ export class Profile implements OnInit {
   }
   hideConfirmAlert(){
     this.confirmAlertOpened = false;
+  }
+  deleteUser(userId: string){
+    this.userService.deleteUser(userId).subscribe({next: ()=>{
+      sessionStorage.clear();
+      this.router.navigate(['/']);
+    }})
   }
 }

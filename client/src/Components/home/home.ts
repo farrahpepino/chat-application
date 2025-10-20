@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ChatList } from '../chat-list/chat-list';
 import { ChatRoom } from '../chat-room/chat-room';
 import { Profile } from '../profile/profile';
+import { UserDto } from '../../DTOs/UserDto';
 
 @Component({
   selector: 'app-Home',
@@ -17,6 +18,13 @@ export class Home {
   createFormOpened = false;
   confirmAlertOpened = false;
   emptyRecipient = true;
+
+  selectedUser: UserDto | null = null;
+
+  onUserSelected(user: UserDto) {
+    this.selectedUser = user;
+  }
+  
 
   switchView(component: string){
     if (component=="profile"){

@@ -27,13 +27,13 @@
 <div class="chat-container flex-row">
     @switch(componentSelected){
         @case("chats"){
-        <app-chat-list />
+            <app-chat-list (userSelected)="onUserSelected($event)"></app-chat-list>
         }
         @case("profile"){
         <app-profile />
         }
     }
-    <app-chat-room />
+    <app-chat-room [recipient]="selectedUser"></app-chat-room>
 </div>
 
 <!-- <div class="bg" *ngIf="createFormOpened"></div>

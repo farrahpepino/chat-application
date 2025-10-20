@@ -1,21 +1,47 @@
-import { Component } from '@angular/core';
-import { User } from '../../Services/user/user';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { User } from '../../Services/user/user';
 import { UserModel } from '../../Models/UserModel';
+import { UserDto } from '../../DTOs/UserDto';
+import { Chat } from '../../Services/chat/chat';
+import { ChatListDto } from '../../DTOs/ChatListDto';
+
 @Component({
   selector: 'app-chat-list',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './chat-list.html',
-  styleUrl: './chat-list.css'
+  styleUrls: ['./chat-list.css']
 })
-export class ChatList {
-  constructor(private userService: User) {}
-  isActive=true;
+export class ChatList implements OnInit{
+  constructor(private userService: User, private chatService: Chat) {}
+  currentLoggedIn: UserDto | null = null;
+
+  @Output() userSelected = new EventEmitter<UserDto>();
+
+  isActive = true;
   query = '';
-  results: UserModel[] = [];
+  results: UserDto[] = [];
+  chatlist: ChatListDto[] = [];
+
+  ngOnInit(): void {
+    this.currentLoggedIn = this.userService.getCurrentLoggedIn();
+    
+    if (!this.currentLoggedIn) return;
   
-// fix
+    this.chatService.getChatList(this.currentLoggedIn.id).subscribe({
+      next: (data) => {
+        this.chatlist = data;
+      },
+      error: (err) => {
+        console.error('Failed to load chat list:', err);
+        this.chatlist = [];
+      }
+    });
+  }
+  
+
   onSearch(): void {
     const trimmedQuery = this.query.trim();
     if (!trimmedQuery) {
@@ -24,9 +50,7 @@ export class ChatList {
     }
 
     this.userService.searchUser(trimmedQuery).subscribe({
-      next: (data) => {
-        this.results = data;
-      },
+      next: (data) => (this.results = data),
       error: (err) => {
         console.error('Search failed:', err);
         this.results = [];
@@ -34,11 +58,19 @@ export class ChatList {
     });
   }
 
-  clickUser(user: UserModel){
-    const displayedUser = localStorage.getItem("displayedUser");
-    if(displayedUser){
-      localStorage.removeItem("displayedUser");
-    }
-    localStorage.setItem("displayedUser", JSON.stringify(user));
+  selectChat(userId: string) {
+    this.userService.getUser(userId).subscribe({
+      next: (user) => {
+        this.clickUser(user);
+      },
+      error: (err) => {
+        console.error('Failed to fetch user:', err);
+      }
+    });
+  }
+  
+
+  clickUser(user: UserDto): void {
+    this.userSelected.emit(user);
   }
 }

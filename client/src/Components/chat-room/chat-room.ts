@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { firstValueFrom } from 'rxjs';
@@ -18,7 +17,8 @@ import { MessageModel } from '../../Models/MessageModel';
   styleUrls: ['./chat-room.css']
 })
 export class ChatRoom implements OnInit {
-  recipient: UserDto | null = null;
+  @Input() recipient: UserDto | null = null;
+
   currentLoggedIn: UserDto | null = null;
   messages: MessageModel[] = [];
   roomId: string | null = null;
@@ -33,12 +33,7 @@ export class ChatRoom implements OnInit {
     private userService: User,
     private chatService: Chat,
     private cdr: ChangeDetectorRef
-  ) {
-    const displayedUser = localStorage.getItem('displayedUser');
-    if (displayedUser) {
-      this.recipient = JSON.parse(displayedUser);
-    }
-  }
+  ) {}
 
   async ngOnInit() {
     this.currentLoggedIn = this.userService.getCurrentLoggedIn();
@@ -56,25 +51,43 @@ export class ChatRoom implements OnInit {
     });
 
     if (this.recipient) {
-      try {
-        const response = await firstValueFrom(
-          this.chatService.getChatRoomId(this.currentLoggedIn.id, this.recipient.id)
-        );
+      await this.loadChatRoom();
+    }
+  }
 
+  async ngOnChanges() {
+    if (this.recipient && this.currentLoggedIn) {
+      await this.loadChatRoom();
+    }
+  }
+
+  private async loadChatRoom() {
+   
+    try {
+      if (this.currentLoggedIn!.id === this.recipient!.id){
+        this.messages = [];
+      }
+      else{
+        const response = await firstValueFrom(
+          this.chatService.getChatRoomId(this.currentLoggedIn!.id, this.recipient!.id)
+        );
+  
         this.roomId = typeof response === 'string'
           ? response
           : (response as any)?.roomId;
-
+  
         if (this.roomId) {
           this.chatService.getMessages(this.roomId).subscribe({
             next: (data) => {
-              this.messages = [...data];
+              this.messages = data;
               this.isLoadingMessages = false;
               this.cdr.detectChanges();
             }
           });
         }
-      } catch (error) {}
+      }
+    } catch (error) {
+      console.error('Failed to load chat room:', error);
     }
   }
 
@@ -109,6 +122,8 @@ export class ChatRoom implements OnInit {
       await firstValueFrom(this.chatService.sendMessage(message));
       this.websocketService.sendMessage(message);
       this.messageForm.reset();
-    } catch (err) {}
+    } catch (err) {
+      console.error('Send message failed:', err);
+    }
   }
 }

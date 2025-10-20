@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserDto } from '../../DTOs/UserDto';
 import { HttpClient } from '@angular/common/http';
-import { UserModel } from '../../Models/UserModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,14 +22,21 @@ export class User {
     return null;  
   }
 
-  searchUser(query: string): Observable<UserModel[]> {
+  searchUser(query: string): Observable<UserDto[]> {
     if (!query.trim()) {
       throw new Error('Query cannot be empty');
     }
   
     const encodedQuery = encodeURIComponent(query.trim());
-    return this.http.get<UserModel[]>(`${this.baseUrl}/search/${encodedQuery}`);
+    return this.http.get<UserDto[]>(`${this.baseUrl}/search/${encodedQuery}`);
   }
-  
-  
+
+
+  getUser(userId: string): Observable<UserDto>{
+    return this.http.get<UserDto>(`${this.baseUrl}/${userId}`);
+  }
+
+  deleteUser(userId: string): Observable<any>{
+    return this.http.delete<any>(`${this.baseUrl}/${userId}`);
+  }
 }

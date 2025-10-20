@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageModel } from '../../Models/MessageModel';
 import { Observable } from 'rxjs';
+import { ChatListDto } from '../../DTOs/ChatListDto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,8 @@ export class Chat {
   getMessages(roomId: string): Observable<MessageModel[]>{
       return this.http.get<MessageModel[]>(`${this.baseUrl}/${roomId}/messages`)
     }
+
+  getChatList(userId: string): Observable<ChatListDto[]>{
+    return this.http.get<ChatListDto[]>(`${this.baseUrl}/${userId}/chats`);
+  }
 }

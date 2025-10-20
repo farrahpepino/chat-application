@@ -30,5 +30,12 @@ namespace server.Controllers {
             }
             return Ok(user);
         }
+
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId){
+            await _service.DeleteUser(userId);
+            return NotFound();
+        }
+
     }
 }
