@@ -36,6 +36,7 @@ export class ChatRoom implements OnInit {
   ) {}
 
   async ngOnInit() {
+
     this.currentLoggedIn = this.userService.getCurrentLoggedIn();
     if (!this.currentLoggedIn) return;
 
@@ -62,12 +63,9 @@ export class ChatRoom implements OnInit {
   }
 
   private async loadChatRoom() {
-   
+    this.messages = []
+
     try {
-      if (this.currentLoggedIn!.id === this.recipient!.id){
-        this.messages = [];
-      }
-      else{
         const response = await firstValueFrom(
           this.chatService.getChatRoomId(this.currentLoggedIn!.id, this.recipient!.id)
         );
@@ -75,7 +73,7 @@ export class ChatRoom implements OnInit {
         this.roomId = typeof response === 'string'
           ? response
           : (response as any)?.roomId;
-  
+          console.log(this.roomId);
         if (this.roomId) {
           this.chatService.getMessages(this.roomId).subscribe({
             next: (data) => {
@@ -85,7 +83,6 @@ export class ChatRoom implements OnInit {
             }
           });
         }
-      }
     } catch (error) {
       console.error('Failed to load chat room:', error);
     }

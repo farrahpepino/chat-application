@@ -24,11 +24,13 @@ namespace server.Repositories{
 
         public async Task<string> GetChatRoomId(string participantId1, string participantId2){
 
-           var chatRooms = await _context.Chatrooms.ToListAsync();
+          
+            var chatRooms = await _context.Chatrooms.ToListAsync();
             var room = chatRooms.FirstOrDefault(c =>
-                c.Participants.Contains(participantId1) &&
-                c.Participants.Contains(participantId2));
-
+            c.Participants.Contains(participantId1) &&
+            c.Participants.Contains(participantId2) &&
+            c.Participants.Count == (participantId1 == participantId2 ? 1 : 2));
+            
             return room?.Id.ToString();
         }
 

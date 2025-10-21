@@ -19,7 +19,7 @@ namespace server.Services {
         }
 
         public async Task DeleteUser(string userId){
-            return await _repository.DeleteUser(userId);
+            await _repository.DeleteUser(userId);
         }
     }
 }

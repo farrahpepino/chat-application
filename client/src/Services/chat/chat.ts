@@ -22,10 +22,19 @@ export class Chat {
   }
 
   createChatRoomId(id: string, participantId1: string, participantId2: string) {
-    return this.http.post<void>(`${this.baseUrl}/rooms`, {
-      id,
-      participants: [participantId1, participantId2]
-    });
+    if (participantId1 == participantId2){
+      return this.http.post<void>(`${this.baseUrl}/rooms`, {
+        id,
+        participants: [participantId1]
+      });
+    }
+    else{
+      return this.http.post<void>(`${this.baseUrl}/rooms`, {
+        id,
+        participants: [participantId1, participantId2]
+      });
+    }
+
   }
 
   sendMessage(message: MessageModel) {  
