@@ -27,9 +27,13 @@ namespace server.Controllers {
         public async Task<IActionResult> SendMessage ([FromBody] Message message){
             await _service.SendMessage(message);
             var messageJson = JsonSerializer.Serialize(message);
-            await ChatWebSocketHandler.SendMessageToUserAsync(message.RecipientId, messageJson);
-            await ChatWebSocketHandler.SendMessageToUserAsync(message.SenderId, messageJson);
-
+            if(message.RecipientId == message.SenderId){
+                await ChatWebSocketHandler.SendMessageToUserAsync(message.SenderId, messageJson);
+            }
+            else{
+                await ChatWebSocketHandler.SendMessageToUserAsync(message.RecipientId, messageJson);
+                await ChatWebSocketHandler.SendMessageToUserAsync(message.SenderId, messageJson);
+            }
             return Ok();
         }
 

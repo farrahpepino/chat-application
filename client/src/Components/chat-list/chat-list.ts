@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../Services/user/user';
-import { UserModel } from '../../Models/UserModel';
 import { UserDto } from '../../DTOs/UserDto';
 import { Chat } from '../../Services/chat/chat';
 import { ChatListDto } from '../../DTOs/ChatListDto';
@@ -19,6 +18,7 @@ export class ChatList implements OnInit{
   currentLoggedIn: UserDto | null = null;
 
   @Output() userSelected = new EventEmitter<UserDto>();
+  selectedUser: UserDto | null = null;
 
   isActive = true;
   query = '';
@@ -33,6 +33,7 @@ export class ChatList implements OnInit{
     this.chatService.getChatList(this.currentLoggedIn.id).subscribe({
       next: (data) => {
         this.chatlist = data;
+        console.log(data);
       },
       error: (err) => {
         console.error('Failed to load chat list:', err);
@@ -41,7 +42,6 @@ export class ChatList implements OnInit{
     });
   }
   
-
   onSearch(): void {
     const trimmedQuery = this.query.trim();
     if (!trimmedQuery) {
@@ -67,10 +67,12 @@ export class ChatList implements OnInit{
         console.error('Failed to fetch user:', err);
       }
     });
+
   }
   
 
   clickUser(user: UserDto): void {
+    this.selectedUser = user; 
     this.userSelected.emit(user);
   }
 }

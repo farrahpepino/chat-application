@@ -45,9 +45,8 @@ namespace server.Repositories{
 
             var result = new List<ChatListDto>();
 
-            foreach (var c in userChatrooms)
-            {
-                var recipientId = c.Participants.FirstOrDefault(p => p != userId);
+            foreach (var c in userChatrooms){ 
+                var recipientId = c.Participants.FirstOrDefault(p => p != userId) ?? userId;
                 if (recipientId == null) continue;
 
                 var recipient = await _context.Users

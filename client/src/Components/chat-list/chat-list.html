@@ -21,7 +21,7 @@
     <br>
     <br>
     <div class="chat-list">
-        <button type="button" class="chat-bt"   [class.active]="isActive" *ngFor="let chat of chatlist" (click)="selectChat(chat.recipientId)">        
+        <button type="button" class="chat-bt"   [class.active]="selectedUser?.id == chat.recipientId" *ngFor="let chat of chatlist" (click)="selectChat(chat.recipientId)">        
             <div class="flex-col">
                 <strong>{{chat.recipientName}}</strong>
                 <div class="subtext">@{{chat.recipientUsername}}</div>
