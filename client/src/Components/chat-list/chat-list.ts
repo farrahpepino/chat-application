@@ -33,7 +33,6 @@ export class ChatList implements OnInit{
     this.chatService.getChatList(this.currentLoggedIn.id).subscribe({
       next: (data) => {
         this.chatlist = data;
-        console.log(data);
       },
       error: (err) => {
         console.error('Failed to load chat list:', err);

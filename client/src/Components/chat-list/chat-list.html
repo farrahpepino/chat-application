@@ -25,9 +25,14 @@
             <div class="flex-col">
                 <strong>{{chat.recipientName}}</strong>
                 <div class="subtext">@{{chat.recipientUsername}}</div>
-                <p class="ml-10">
+                <p class="ml-10" *ngIf="chat.recipientId !== currentLoggedIn!.id">
                     {{ chat.recipientId !== currentLoggedIn!.id ? 'You' : chat.recipientName }}:
-                    {{chat.latestMessage}}</p>
+                    {{chat.latestMessage}}
+                </p>
+                <p class="ml-10" *ngIf="chat.recipientId === currentLoggedIn!.id">
+                    {{ chat.recipientId === currentLoggedIn!.id ? 'You' : chat.recipientName }}:
+                    {{chat.latestMessage}}
+                </p>
             </div>
         </button>
     </div>

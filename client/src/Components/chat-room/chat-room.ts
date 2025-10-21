@@ -73,7 +73,6 @@ export class ChatRoom implements OnInit {
         this.roomId = typeof response === 'string'
           ? response
           : (response as any)?.roomId;
-          console.log(this.roomId);
         if (this.roomId) {
           this.chatService.getMessages(this.roomId).subscribe({
             next: (data) => {
