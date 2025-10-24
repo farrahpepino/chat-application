@@ -74,6 +74,5 @@ app.UseWebSockets();
 app.MapControllers();
 app.Map("/ws/chat", ChatWebSocketHandler.HandleAsync);
 
-
 app.Run();
 
